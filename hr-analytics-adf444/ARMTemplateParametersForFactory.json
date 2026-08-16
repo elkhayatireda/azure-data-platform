@@ -1,0 +1,30 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "hr-analytics-adf444"
+		},
+		"AzureDatabricks_LinkedService_accessToken": {
+			"value": ""
+		},
+		"postgresqllinkedlist_password": {
+			"value": ""
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"value": "https://hr1storage1.dfs.core.windows.net/"
+		},
+		"AzureDatabricks_LinkedService_properties_typeProperties_existingClusterId": {
+			"value": "0812-163037-aziskuaq"
+		},
+		"postgresqllinkedlist_properties_typeProperties_server": {
+			"value": "127.0.0.1"
+		},
+		"postgresqllinkedlist_properties_typeProperties_database": {
+			"value": "hr_analytics"
+		},
+		"postgresqllinkedlist_properties_typeProperties_username": {
+			"value": "hr_admin"
+		}
+	}
+}

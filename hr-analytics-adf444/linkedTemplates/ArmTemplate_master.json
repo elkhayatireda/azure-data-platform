@@ -1,0 +1,91 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "hr-analytics-adf444"
+		},
+		"AzureDatabricks_LinkedService_accessToken": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accessToken' of 'AzureDatabricks_LinkedService'"
+		},
+		"postgresqllinkedlist_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'postgresqllinkedlist'"
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://hr1storage1.dfs.core.windows.net/"
+		},
+		"AzureDatabricks_LinkedService_properties_typeProperties_existingClusterId": {
+			"type": "string",
+			"defaultValue": "0812-163037-aziskuaq"
+		},
+		"postgresqllinkedlist_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "127.0.0.1"
+		},
+		"postgresqllinkedlist_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "hr_analytics"
+		},
+		"postgresqllinkedlist_properties_typeProperties_username": {
+			"type": "string",
+			"defaultValue": "hr_admin"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "hr-analytics-adf444_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"AzureDatabricks_LinkedService_accessToken": {
+						"value": "[parameters('AzureDatabricks_LinkedService_accessToken')]"
+					},
+					"postgresqllinkedlist_password": {
+						"value": "[parameters('postgresqllinkedlist_password')]"
+					},
+					"AzureDataLakeStorage1_properties_typeProperties_url": {
+						"value": "[parameters('AzureDataLakeStorage1_properties_typeProperties_url')]"
+					},
+					"AzureDatabricks_LinkedService_properties_typeProperties_existingClusterId": {
+						"value": "[parameters('AzureDatabricks_LinkedService_properties_typeProperties_existingClusterId')]"
+					},
+					"postgresqllinkedlist_properties_typeProperties_server": {
+						"value": "[parameters('postgresqllinkedlist_properties_typeProperties_server')]"
+					},
+					"postgresqllinkedlist_properties_typeProperties_database": {
+						"value": "[parameters('postgresqllinkedlist_properties_typeProperties_database')]"
+					},
+					"postgresqllinkedlist_properties_typeProperties_username": {
+						"value": "[parameters('postgresqllinkedlist_properties_typeProperties_username')]"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}
