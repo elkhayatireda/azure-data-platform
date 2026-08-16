@@ -23,6 +23,10 @@
 			"type": "string",
 			"defaultValue": "0812-163037-aziskuaq"
 		},
+		"linkedserviceADLS2_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://hr1storage1.dfs.core.windows.net/"
+		},
 		"postgresqllinkedlist_properties_typeProperties_server": {
 			"type": "string",
 			"defaultValue": "127.0.0.1"
@@ -67,6 +71,19 @@
 						"value": "[parameters('AzureDatabricks_LinkedService_accessToken')]"
 					},
 					"existingClusterId": "[parameters('AzureDatabricks_LinkedService_properties_typeProperties_existingClusterId')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/linkedserviceADLS2')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('linkedserviceADLS2_properties_typeProperties_url')]"
 				}
 			},
 			"dependsOn": []

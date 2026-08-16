@@ -17,6 +17,9 @@
 		"AzureDatabricks_LinkedService_properties_typeProperties_existingClusterId": {
 			"value": "0812-163037-aziskuaq"
 		},
+		"linkedserviceADLS2_properties_typeProperties_url": {
+			"value": "https://hr1storage1.dfs.core.windows.net/"
+		},
 		"postgresqllinkedlist_properties_typeProperties_server": {
 			"value": "127.0.0.1"
 		},
