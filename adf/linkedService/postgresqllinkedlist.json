@@ -1,0 +1,21 @@
+{
+	"name": "postgresqllinkedlist",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "PostgreSqlV2",
+		"typeProperties": {
+			"server": "127.0.0.1",
+			"port": "5433",
+			"database": "hr_analytics",
+			"username": "hr_admin",
+			"sslMode": 0,
+			"authenticationType": "Basic",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJkZDE0ZDBkZS1mNDcyLTRlZWItYTdmYS01NjQ2YmRiNDQ5ZTMiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "postgresqlIntergrationRuntime",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}
