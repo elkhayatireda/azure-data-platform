@@ -35,6 +35,10 @@
 			"type": "string",
 			"defaultValue": "0812-163037-aziskuaq"
 		},
+		"trigger_on_performance_upload_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/dd457860-9fe4-4417-9b8c-0122af370b75/resourceGroups/hr_analytics_RG/providers/Microsoft.Storage/storageAccounts/hr1storage1"
+		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -82,6 +86,9 @@
 					},
 					"postgresqllinkedlist_properties_typeProperties_username": {
 						"value": "[parameters('postgresqllinkedlist_properties_typeProperties_username')]"
+					},
+					"trigger_on_performance_upload_properties_typeProperties_scope": {
+						"value": "[parameters('trigger_on_performance_upload_properties_typeProperties_scope')]"
 					}
 				}
 			},

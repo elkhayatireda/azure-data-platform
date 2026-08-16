@@ -34,6 +34,10 @@
 		"AzureDatabricks1_properties_typeProperties_existingClusterId": {
 			"type": "string",
 			"defaultValue": "0812-163037-aziskuaq"
+		},
+		"trigger_on_performance_upload_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/dd457860-9fe4-4417-9b8c-0122af370b75/resourceGroups/hr_analytics_RG/providers/Microsoft.Storage/storageAccounts/hr1storage1"
 		}
 	},
 	"variables": {
@@ -283,6 +287,36 @@
 				}
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/trigger_on_performance_upload')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "pipeline1",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "BlobEventsTrigger",
+				"typeProperties": {
+					"blobPathBeginsWith": "/raw/blobs/performance/",
+					"ignoreEmptyBlobs": true,
+					"scope": "[parameters('trigger_on_performance_upload_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/pipeline1')]"
+			]
 		}
 	]
 }
