@@ -7,23 +7,15 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "hr-analytics-adf444"
 		},
-		"AzureDatabricks_LinkedService_accessToken": {
-			"type": "secureString",
-			"metadata": "Secure string for 'accessToken' of 'AzureDatabricks_LinkedService'"
-		},
 		"postgresqllinkedlist_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'postgresqllinkedlist'"
 		},
+		"AzureDatabricks1_accessToken": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accessToken' of 'AzureDatabricks1'"
+		},
 		"AzureDataLakeStorage1_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://hr1storage1.dfs.core.windows.net/"
-		},
-		"AzureDatabricks_LinkedService_properties_typeProperties_existingClusterId": {
-			"type": "string",
-			"defaultValue": "0812-163037-aziskuaq"
-		},
-		"linkedserviceADLS2_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://hr1storage1.dfs.core.windows.net/"
 		},
@@ -38,6 +30,10 @@
 		"postgresqllinkedlist_properties_typeProperties_username": {
 			"type": "string",
 			"defaultValue": "hr_admin"
+		},
+		"AzureDatabricks1_properties_typeProperties_existingClusterId": {
+			"type": "string",
+			"defaultValue": "0812-163037-aziskuaq"
 		}
 	},
 	"variables": {
@@ -102,6 +98,60 @@
 								"parameters": {}
 							}
 						]
+					},
+					{
+						"name": "raw_to_silver",
+						"type": "DatabricksNotebook",
+						"dependsOn": [
+							{
+								"activity": "mv data to adls",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"notebookPath": "/Workspace/Users/elkhayatireda2@gmail.com/azure-data-platform/notebooks/01_raw_to_silver"
+						},
+						"linkedServiceName": {
+							"referenceName": "AzureDatabricks1",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "silver_to_gold",
+						"type": "DatabricksNotebook",
+						"dependsOn": [
+							{
+								"activity": "raw_to_silver",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"notebookPath": "/Workspace/Users/elkhayatireda2@gmail.com/azure-data-platform/notebooks/02_silver_to_gold"
+						},
+						"linkedServiceName": {
+							"referenceName": "AzureDatabricks1",
+							"type": "LinkedServiceReference"
+						}
 					}
 				],
 				"policy": {
@@ -111,7 +161,8 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/PostgreSqlTable1')]",
-				"[concat(variables('factoryId'), '/datasets/DelimitedText1')]"
+				"[concat(variables('factoryId'), '/datasets/DelimitedText1')]",
+				"[concat(variables('factoryId'), '/linkedServices/AzureDatabricks1')]"
 			]
 		},
 		{
@@ -127,7 +178,10 @@
 				"type": "DelimitedText",
 				"typeProperties": {
 					"location": {
-						"type": "AzureBlobFSLocation"
+						"type": "AzureBlobFSLocation",
+						"fileName": "employees.csv ",
+						"folderPath": "employees",
+						"fileSystem": "raw"
 					},
 					"columnDelimiter": ",",
 					"escapeChar": "\\",
@@ -175,37 +229,6 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/AzureDatabricks_LinkedService')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureDatabricks",
-				"typeProperties": {
-					"domain": "https://adb-7405616944891643.3.azuredatabricks.net",
-					"accessToken": {
-						"type": "SecureString",
-						"value": "[parameters('AzureDatabricks_LinkedService_accessToken')]"
-					},
-					"existingClusterId": "[parameters('AzureDatabricks_LinkedService_properties_typeProperties_existingClusterId')]"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/linkedserviceADLS2')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobFS",
-				"typeProperties": {
-					"url": "[parameters('linkedserviceADLS2_properties_typeProperties_url')]"
-				}
-			},
-			"dependsOn": []
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/postgresqllinkedlist')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -240,6 +263,24 @@
 			"properties": {
 				"type": "SelfHosted",
 				"typeProperties": {}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureDatabricks1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureDatabricks",
+				"typeProperties": {
+					"domain": "https://adb-7405616944891643.3.azuredatabricks.net",
+					"accessToken": {
+						"type": "SecureString",
+						"value": "[parameters('AzureDatabricks1_accessToken')]"
+					},
+					"existingClusterId": "[parameters('AzureDatabricks1_properties_typeProperties_existingClusterId')]"
+				}
 			},
 			"dependsOn": []
 		}
