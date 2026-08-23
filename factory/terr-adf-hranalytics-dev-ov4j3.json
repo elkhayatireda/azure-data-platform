@@ -1,0 +1,15 @@
+{
+	"name": "terr-adf-hranalytics-dev-ov4j3",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Disabled",
+			"editable": true
+		}
+	},
+	"location": "westus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "c24dee38-b02a-4d13-96b8-64ea6220d2d4",
+		"tenantId": "853a35d1-236e-4312-ac64-c777bc520b94"
+	}
+}
