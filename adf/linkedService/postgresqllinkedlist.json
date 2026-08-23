@@ -11,10 +11,10 @@
 			"username": "hr_admin",
 			"sslMode": 0,
 			"authenticationType": "Basic",
-			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJkZDE0ZDBkZS1mNDcyLTRlZWItYTdmYS01NjQ2YmRiNDQ5ZTMiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI2OGFiM2ZjNy02ZGQ3LTQzNWQtOTVhZC1lYTNhYmUyNmIxMzIiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
 		},
 		"connectVia": {
-			"referenceName": "postgresqlIntergrationRuntime",
+			"referenceName": "terr-shir-onprem-postgres",
 			"type": "IntegrationRuntimeReference"
 		}
 	}
