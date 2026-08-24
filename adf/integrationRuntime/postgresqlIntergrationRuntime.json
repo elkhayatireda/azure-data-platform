@@ -1,6 +1,0 @@
-{
-	"name": "postgresqlIntergrationRuntime",
-	"properties": {
-		"type": "SelfHosted"
-	}
-}
