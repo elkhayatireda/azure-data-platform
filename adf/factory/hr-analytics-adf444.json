@@ -1,0 +1,15 @@
+{
+	"name": "hr-analytics-adf444",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Disabled",
+			"editable": true
+		}
+	},
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "2c9da3e2-cdd6-4603-a522-8f9a068932e3",
+		"tenantId": "853a35d1-236e-4312-ac64-c777bc520b94"
+	}
+}

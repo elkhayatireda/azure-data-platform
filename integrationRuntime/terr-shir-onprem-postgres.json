@@ -1,0 +1,10 @@
+{
+	"name": "terr-shir-onprem-postgres",
+	"properties": {
+		"type": "SelfHosted",
+		"description": "Bridges ADF to on-prem PostgreSQL for the Employees source",
+		"typeProperties": {
+			"selfContainedInteractiveAuthoringEnabled": false
+		}
+	}
+}
