@@ -1,0 +1,6 @@
+project     = "hranalytics"
+environment = "dev"
+location    = "westeurope"
+
+# Find this in the Databricks workspace: top-right user icon
+databricks_single_user_name = "you@yourtenant.onmicrosoft.com"

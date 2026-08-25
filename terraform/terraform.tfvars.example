@@ -1,0 +1,3 @@
+project     = "hranalytics"
+environment = "dev"
+location    = "westeurope"
