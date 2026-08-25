@@ -1,0 +1,98 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "terr-adf-hranalytics-dev-ov4j3"
+		},
+		"AzureDatabricks1_accessToken": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accessToken' of 'AzureDatabricks1'"
+		},
+		"postgresqllinkedlist_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'postgresqllinkedlist'"
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://terrsthranalyticdevov4j3.dfs.core.windows.net/"
+		},
+		"AzureDatabricks1_properties_typeProperties_existingClusterId": {
+			"type": "string",
+			"defaultValue": "0824-081039-merkw69f"
+		},
+		"postgresqllinkedlist_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "127.0.0.1"
+		},
+		"postgresqllinkedlist_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "hr_analytics"
+		},
+		"postgresqllinkedlist_properties_typeProperties_username": {
+			"type": "string",
+			"defaultValue": "hr_admin"
+		},
+		"trigger_on_performance_upload_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/dd457860-9fe4-4417-9b8c-0122af370b75/resourceGroups/hr_analytics_RG/providers/Microsoft.Storage/storageAccounts/hr1storage1"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "terr-adf-hranalytics-dev-ov4j3_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"AzureDatabricks1_accessToken": {
+						"value": "[parameters('AzureDatabricks1_accessToken')]"
+					},
+					"postgresqllinkedlist_password": {
+						"value": "[parameters('postgresqllinkedlist_password')]"
+					},
+					"AzureDataLakeStorage1_properties_typeProperties_url": {
+						"value": "[parameters('AzureDataLakeStorage1_properties_typeProperties_url')]"
+					},
+					"AzureDatabricks1_properties_typeProperties_existingClusterId": {
+						"value": "[parameters('AzureDatabricks1_properties_typeProperties_existingClusterId')]"
+					},
+					"postgresqllinkedlist_properties_typeProperties_server": {
+						"value": "[parameters('postgresqllinkedlist_properties_typeProperties_server')]"
+					},
+					"postgresqllinkedlist_properties_typeProperties_database": {
+						"value": "[parameters('postgresqllinkedlist_properties_typeProperties_database')]"
+					},
+					"postgresqllinkedlist_properties_typeProperties_username": {
+						"value": "[parameters('postgresqllinkedlist_properties_typeProperties_username')]"
+					},
+					"trigger_on_performance_upload_properties_typeProperties_scope": {
+						"value": "[parameters('trigger_on_performance_upload_properties_typeProperties_scope')]"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}

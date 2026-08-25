@@ -1,0 +1,33 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "hr-analytics-adf444"
+		},
+		"postgresqllinkedlist_password": {
+			"value": ""
+		},
+		"AzureDatabricks1_accessToken": {
+			"value": ""
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"value": "https://hr1storage1.dfs.core.windows.net/"
+		},
+		"postgresqllinkedlist_properties_typeProperties_server": {
+			"value": "127.0.0.1"
+		},
+		"postgresqllinkedlist_properties_typeProperties_database": {
+			"value": "hr_analytics"
+		},
+		"postgresqllinkedlist_properties_typeProperties_username": {
+			"value": "hr_admin"
+		},
+		"AzureDatabricks1_properties_typeProperties_existingClusterId": {
+			"value": "0812-163037-aziskuaq"
+		},
+		"trigger_on_performance_upload_properties_typeProperties_scope": {
+			"value": "/subscriptions/dd457860-9fe4-4417-9b8c-0122af370b75/resourceGroups/hr_analytics_RG/providers/Microsoft.Storage/storageAccounts/hr1storage1"
+		}
+	}
+}
